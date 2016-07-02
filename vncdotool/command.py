@@ -76,7 +76,7 @@ class ExitingProcess(protocol.ProcessProtocol):
         reactor.callLater(0.1, reactor.stop)
 
     def errReceived(self, data):
-        print data
+        print(data)
 
 
 class VNCDoToolOptionParser(optparse.OptionParser):
@@ -147,8 +147,8 @@ def build_command_list(factory, args, delay=None, warp=1.0):
             filename = args.pop(0)
             imgformat = os.path.splitext(filename)[1][1:]
             if imgformat not in SUPPORTED_FORMATS:
-                print 'unsupported image format "%s", choose one of %s' % (
-                        imgformat, SUPPORTED_FORMATS)
+                print('unsupported image format "%s", choose one of %s' % (
+                        imgformat, SUPPORTED_FORMATS))
             else:
                 factory.deferred.addCallback(client.captureScreen, filename)
         elif cmd == 'expect':
@@ -163,8 +163,8 @@ def build_command_list(factory, args, delay=None, warp=1.0):
             h = int(args.pop(0))
             imgformat = os.path.splitext(filename)[1][1:]
             if imgformat not in SUPPORTED_FORMATS:
-                print 'unsupported image format "%s", choose one of %s' % (
-                        imgformat, SUPPORTED_FORMATS)
+                print('unsupported image format "%s", choose one of %s' % (
+                        imgformat, SUPPORTED_FORMATS))
             else:
                 factory.deferred.addCallback(client.captureRegion, filename, x, y, w, h)
         elif cmd == 'rexpect':
@@ -184,7 +184,7 @@ def build_command_list(factory, args, delay=None, warp=1.0):
             lex.whitespace_split = True
             args = list(lex) + args
         else:
-            print 'unknown cmd "%s"' % cmd
+            print('unknown cmd "%s"' % cmd)
 
         if delay and args:
             factory.deferred.addCallback(client.pause, delay)

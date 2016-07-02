@@ -6,7 +6,7 @@ Twisted based VNC client protocol and factory
 MIT License
 """
 
-import rfb
+from vncdotool import rfb
 from twisted.internet.defer import Deferred
 from twisted.internet import reactor
 
@@ -110,7 +110,7 @@ try:
     # in a thread.
     Image.preinit()
     Image.init()
-except ImportError, e:
+except ImportError as e:
     # If there is no PIL, raise ImportError where someone tries to use
     # it.
     class _Image(object):
@@ -351,10 +351,10 @@ class VNCDoToolClient(rfb.RFBClient):
         self.factory.clientConnectionMade(self)
 
     def bell(self):
-        print 'ding'
+        print('ding')
 
     def copy_text(self, text):
-        print 'clipboard copy', repr(text)
+        print('clipboard copy', repr(text))
 
     def paste(self, message):
         self.clientCutText(message)

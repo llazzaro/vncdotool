@@ -5,7 +5,8 @@ debugging is appreciated.
 """
 
 import threading
-import Queue
+from multiprocessing import Queue
+
 import logging
 
 from twisted.internet import reactor
@@ -76,7 +77,7 @@ class ThreadedVNCClientProxy(object):
 
     def __init__(self, factory):
         self.factory = factory
-        self.queue = Queue.Queue()
+        self.queue = Queue()
 
     def connect(self, host, port=5900):
         reactor.callWhenRunning(reactor.connectTCP, host, port, self.factory)

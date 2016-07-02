@@ -21,7 +21,7 @@ TYPE_LEN = {
     5: 6,
 }
 
-REVERSE_MAP = dict((v, n) for (n, v) in KEYMAP.iteritems())
+REVERSE_MAP = dict((v, n) for (n, v) in KEYMAP.items())
 
 
 class RFBServer(Protocol):

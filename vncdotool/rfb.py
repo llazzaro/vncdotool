@@ -15,17 +15,17 @@ MIT License
 import sys
 import math
 from struct import pack, unpack
-import pyDes
+from vncdotool import pyDes
 from twisted.python import usage, log
-from twisted.internet.protocol import Factory, Protocol
+from twisted.internet.protocol import Protocol
 from twisted.internet import protocol
 from twisted.application import internet, service
 
-#~ from twisted.internet import reactor
+# ~ from twisted.internet import reactor
 
 
-#encoding-type
-#for SetEncodings()
+# encoding-type
+# for SetEncodings()
 RAW_ENCODING =                  0
 COPY_RECTANGLE_ENCODING =       1
 RRE_ENCODING =                  2
@@ -630,25 +630,25 @@ if __name__ == '__main__':
     class RFBTest(RFBClient):
         """dummy client"""
         def vncConnectionMade(self):
-            print "Screen format: depth=%d bytes_per_pixel=%r" % (self.depth, self.bpp)
-            print "Desktop name: %r" % self.name
+            print("Screen format: depth=%d bytes_per_pixel=%r" % (self.depth, self.bpp))
+            print("Desktop name: %r" % self.name)
             self.SetEncodings([RAW_ENCODING])
             self.FramebufferUpdateRequest()
 
         def updateRectangle(self, x, y, width, height, data):
-            print "%s " * 5 % (x, y, width, height, repr(data[:20]))
+            print("%s " * 5 % (x, y, width, height, repr(data[:20])))
 
     class RFBTestFactory(protocol.ClientFactory):
         """test factory"""
         protocol = RFBTest
         def clientConnectionLost(self, connector, reason):
-            print reason
+            print(reason)
             from twisted.internet import reactor
             reactor.stop()
             #~ connector.connect()
 
         def clientConnectionFailed(self, connector, reason):
-            print "connection failed:", reason
+            print("connection failed:", reason)
             from twisted.internet import reactor
             reactor.stop()
 
@@ -663,10 +663,10 @@ if __name__ == '__main__':
     o = Options()
     try:
         o.parseOptions()
-    except usage.UsageError, errortext:
-        print "%s: %s" % (sys.argv[0], errortext)
-        print "%s: Try --help for usage details." % (sys.argv[0])
-        raise SystemExit, 1
+    except usage.UsageError as errortext:
+        print("%s: %s" % (sys.argv[0], errortext))
+        print("%s: Try --help for usage details." % (sys.argv[0]))
+        raise SystemExit(1)
 
     logFile = sys.stdout
     if o.opts['outfile']:
